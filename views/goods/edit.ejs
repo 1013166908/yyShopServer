@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>类别添加</title>
+</head>
+<body>
+<!--The content below is only a placeholder and can be replaced.-->
+
+<link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+<link rel="stylesheet" href="/css/basic.css">
+<%- include  ../public/top.ejs  %>
+
+
+
+<div class="container-fluid">
+    <div class="row">
+
+
+
+        <%- include  ../public/left.ejs  %>
+
+        <div class="col-sm-10">
+            <ol class="breadcrumb">
+                <li class="active">类别管理
+                </li>
+                <li class="active">类别列表
+                </li>
+            </ol>
+            <div class="panel panel-default">
+
+                <div class="panel-heading">
+                    修改类别
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive input-form">
+                        <form action="/type/doAdd" method="post" enctype="multipart/form-data">
+                            <ul>
+                                <li>  类别名称: <input type="text" value="<%= types.name%>" name="typename" required/></li>
+                                <li>
+                                    <div id="types-image">
+                                        当前图片：<img src="../<%= types.image%>" alt="暂无图片" style="width: 50px;height:50px;vertical-align: bottom"> <input type="button" value="修改">
+                                    </div>
+                                    <div id="types-image-change" style="display: none">
+                                        选择图片: <input type="file" value="<%= types.image%>" name="pic"/> <input type="button" value="取消">
+                                    </div>
+                                </li>
+                                <!--<li>  商品价格: <input type="text" name="price"/></li>-->
+                                <!--<li>  商品邮费: <input type="text" name="fee"/></li>-->
+
+                                <!--<li>-->
+                                <!--商品描述:-->
+                                <!--<textarea name="description" id="" cols="60" rows="8"></textarea>-->
+                                <!--</li>-->
+
+                                <li>
+                                    <br/>
+                                    <button type="submit" class="btn btn-default">提交</button>
+                                </li>
+
+                            </ul>
+
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    let div1=document.getElementById("types-image");
+    let div2=document.getElementById("types-image-change");
+    let btn1=div1.getElementsByTagName("input")[0];
+    let btn2=div2.getElementsByTagName("input")[1];
+    btn1.onclick=function () {
+        div1.style.display="none";
+        div2.style.display="block";
+    }
+    btn2.onclick=function () {
+        div2.style.display="none";
+        div1.style.display="block";
+    }
+</script>
+</body>
+</html>

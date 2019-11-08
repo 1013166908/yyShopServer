@@ -1,0 +1,32 @@
+<div class="col-sm-2" id="left-nav">
+    <a href="#" class="list-group-item">商品管理</a>
+
+    <a href="/goods/index" class="list-group-item">
+        商品列表</a>
+    <a href="/goods/add" class="list-group-item">
+        增加商品</a>
+
+    <a href="/type/index" class="list-group-item">分类管理</a>
+
+    <!--<a href="/type/index" class="list-group-item">-->
+        <!--类别列表</a>-->
+    <a href="/type/add" class="list-group-item">
+        类别添加</a>
+
+
+</div>
+
+<script>
+    let a=document.getElementById("left-nav").getElementsByTagName("a");
+    if(window.location.pathname=="/type/edit") a[3].setAttribute("class", "list-group-item active");
+    else{
+        for(i=0;i<a.length;i++){
+            if(a[i].getAttribute("href")==window.location.pathname) {
+                a[i].setAttribute("class", "list-group-item active");
+                break;
+            }
+        }
+    }
+
+
+</script>
