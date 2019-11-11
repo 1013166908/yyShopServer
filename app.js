@@ -11,7 +11,6 @@ var multiparty = require('multiparty');
 
 const  app  =  new  express()
 
-
 //2 使用ejs模板引擎  (ejs模板引擎 默认的模板目录 views)
 
 //3.设置静态资源目录 (use设置中间件)
@@ -142,7 +141,7 @@ app.get('/type/edit',function(req,res){
 
 
 // -------------------------------------商品路由---------------------------------------------
-//商品路由1-查询商品
+//商品路由1-查询全部商品(带类别名)
 app.get("/goods/index",function(req,res){
     //获取goods商品信息
     //类别显示
@@ -180,7 +179,7 @@ app.post('/goods/doAdd',function(req,res){
     form.parse(req, function(err, fields, files) {
         // fields    就是post数据
         // files    就是文件上传的信息
-        console.log(fields);
+        // console.log(fields);
         let  goodsname = fields.goodsname[0];
         let  typeId = fields.typeId[0];
         let  price = parseFloat(fields.price[0]);
@@ -243,6 +242,8 @@ app.get('/goods/add',function(req,res){
         })
     })
 })
+
+
 
 //1-4 设置端口
 app.listen('3000',"127.0.0.1")
