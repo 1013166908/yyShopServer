@@ -32,6 +32,22 @@ app.get('/',function(req,res){
     res.render('type/index',{})
 })
 
+// ======================用户管理模块=====================
+app.get("/user",function(req,res){
+    //类别显示
+    mongoClient.connect(DBurl,function(err,db){
+        //操作数据表
+        db.collection('user').find().toArray(function(errs,ress){
+            res.render("user/index",{
+                user:ress
+            })
+
+            // console.log(ress)
+        })
+    })
+})
+
+
 // ======================类别管理模块=====================
 
 //类别路由1-查询类别
@@ -140,7 +156,9 @@ app.get('/type/edit',function(req,res){
 })
 
 
-// -------------------------------------商品路由---------------------------------------------
+
+// ======================商品管理模块=====================
+
 //商品路由1-查询全部商品(带类别名)
 app.get("/goods/index",function(req,res){
     //获取goods商品信息
@@ -243,7 +261,86 @@ app.get('/goods/add',function(req,res){
     })
 })
 
+//商品路由3-上下架
+// app.post('/editGoods')
 
+// ======================购物车管理模块=====================
+
+//购物车路由
+app.get('/cart',(req,res)=>{
+    mongoClient.connect(DBurl,(err,db)=>{
+        db.collection('cart').find().toArray((err_c,arr_c)=>{ //查询购物车表
+            let goodsList=[];
+            if(arr_c.length) {
+                arr_c.map((item, index) => {
+                    db.collection('goods').find({gid: item.gid}).toArray((err_g, arr_g) => {
+                        arr_g[0].num=item.num;
+                        arr_g[0].usn=item.usn;
+                        goodsList.push(arr_g[0]);
+                        if (index == arr_c.length -1) {
+
+                            res.render('cart/index',{
+                                goods:goodsList
+                            })
+                        }
+                    })
+                })
+            }
+
+        })
+    })
+})
+
+// ======================订单管理模块=====================
+
+//订单查看
+app.get('/list/index',(req,res)=>{
+    mongoClient.connect(DBurl,(err,db)=>{
+        db.collection('list').find().toArray((err_c,arr_c)=>{ //查询订单表
+            // console.log(arr_c);
+            res.render('list/index',{
+                list:arr_c
+            })
+        })
+    })
+})
+
+//订单详情查看
+app.get('/list/detail',(req,res)=>{
+    let lid=req.query.lid;
+    mongoClient.connect(DBurl,(err,db)=>{
+        db.collection('list-goods').find({lid}).toArray((err_l,arr_c)=>{ //查询订单表
+            // console.log(arr_c);
+            let goodsList=[];
+            if(arr_c.length) {
+                arr_c.map((item, index) => {
+                    db.collection('goods').find({gid: item.gid}).toArray((err_g, arr_g) => {
+                        arr_g[0].num=item.num;
+                        arr_g[0].lid=item.lid;
+                        goodsList.push(arr_g[0]);
+                        if (index == arr_c.length -1) {
+                            res.render('list/detail',{
+                                detail:goodsList
+                            })
+                        }
+                    })
+                })
+            }
+        })
+    })
+})
+
+
+// ======================地址管理模块=====================
+app.get('/address/index',(req,res)=>{
+    mongoClient.connect(DBurl,(err,db)=>{
+        db.collection('address').find().toArray((err_a,arr_a)=>{ //查询订单表
+            res.render('address/index',{
+                address:arr_a
+            })
+        })
+    })
+})
 
 //1-4 设置端口
 app.listen('3000',"127.0.0.1")

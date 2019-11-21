@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户列表</title>
+</head>
+<body>
+<!--The content below is only a placeholder and can be replaced.-->
+
+<link rel="stylesheet" href="/bootstrap/css/bootstrap.css" type="text/css">
+<link rel="stylesheet" href="/css/basic.css" type="text/css">
+
+
+
+<%- include  ../public/top.ejs  %>
+
+<div class="container-fluid">
+    <div class="row">
+
+
+
+        <%- include  ../public/left.ejs  %>
+
+        <div class="col-sm-10">
+            <ol class="breadcrumb">
+                <li class="active">订单管理
+                </li>
+                <!--<li class="active">商品列表-->
+                <!--</li>-->
+            </ol>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    搜索
+                </div>
+                <div class="panel-body">
+                    <form role="form" class="form-inline">
+                        <div class="form-group">
+                            <label for="name">名称</label>
+                            <input type="text" class="form-control" id="name" placeholder="请输入名称">
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-default">开始搜索</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!--
+                列表展示            -->
+            <div class="table-responsive">
+                <table class="table table-striped ">
+                    <thead>
+                    <tr>
+                        <th>订单号</th>
+                        <th>商品id</th>
+                        <th>商品名称</th>
+                        <th>商品图片</th>
+                        <th>商品数量</th>
+                        <th>商品价格</th>
+                        <th>商品总价</th>
+                        <!--<th class="text-center">操作</th>-->
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <% for( let i in  detail){ %>
+                    <tr>
+                        <td><%= detail[i].lid %></td>
+                        <td><%= detail[i].gid %></td>
+                        <td><%= detail[i].name %></td>
+                        <td><img src="../<%= detail[i].image %>" alt="暂无图片" width="50px" height="50px"></td>
+                        <td><%= detail[i].num %></td>
+                        <td><%= detail[i].price %></td>
+                        <td><%= detail[i].num*detail[i].price %></td>
+                    </tr>
+                    <%}%>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+</script>
+</body>
+</html>

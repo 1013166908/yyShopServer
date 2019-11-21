@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户列表</title>
+</head>
+<body>
+<!--The content below is only a placeholder and can be replaced.-->
+
+<link rel="stylesheet" href="/bootstrap/css/bootstrap.css" type="text/css">
+<link rel="stylesheet" href="/css/basic.css" type="text/css">
+
+
+
+<%- include  ../public/top.ejs  %>
+
+<div class="container-fluid">
+    <div class="row">
+
+
+
+        <%- include  ../public/left.ejs  %>
+
+        <div class="col-sm-10">
+            <ol class="breadcrumb">
+                <li class="active">订单管理
+                </li>
+                <!--<li class="active">商品列表-->
+                <!--</li>-->
+            </ol>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    搜索
+                </div>
+                <div class="panel-body">
+                    <form role="form" class="form-inline">
+                        <div class="form-group">
+                            <label for="name">名称</label>
+                            <input type="text" class="form-control" id="name" placeholder="请输入名称">
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-default">开始搜索</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!--
+                列表展示            -->
+            <div class="table-responsive">
+                <table class="table table-striped ">
+                    <thead>
+                    <tr>
+                        <th>订单号</th>
+                        <th>用户名</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                        <!--<th class="text-center">操作</th>-->
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <% for( let i in  list){ %>
+                        <tr>
+                            <td><%= list[i].lid %></td>
+                            <td><%= list[i].usn %></td>
+                            <% if(list[i].state==0) {%>
+                                <td>待发货</td>
+                            <% } else if(list[i].state==1) {%>
+                                <td>待收货</td>
+                            <% } else{%>
+                                <td>已完成</td>
+                            <%}%>
+                            <td><a href="/list/detail?&lid=<%= list[i].lid %>">查看详情</a></td>
+                            <!--<td class="text-center">-->
+                                    <!--<a href="#">编辑</a>/-->
+                                    <!--<a href="#">删除</a>-->
+                            <!--</td>-->
+                        </tr>
+                    <%}%>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+</script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>类别列表</title>
+</head>
+<body>
+<!--The content below is only a placeholder and can be replaced.-->
+
+<link rel="stylesheet" href="/bootstrap/css/bootstrap.css" type="text/css">
+<link rel="stylesheet" href="/css/basic.css" type="text/css">
+
+
+
+<%- include  ../public/top.ejs  %>
+
+<div class="container-fluid">
+    <div class="row">
+
+
+
+        <%- include  ../public/left.ejs  %>
+
+
+
+        <div class="col-sm-10">
+            <ol class="breadcrumb">
+                <li class="active">地址管理
+                </li>
+                <li class="active">地址列表
+                </li>
+            </ol>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    搜索
+                </div>
+                <div class="panel-body">
+                    <form role="form" class="form-inline">
+                        <div class="form-group">
+                            <label for="name">名称</label>
+                            <input type="text" class="form-control" id="name" placeholder="请输入名称">
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-default">开始搜索</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!--
+                列表展示            -->
+            <div class="table-responsive">
+                <table class="table table-striped ">
+                    <thead>
+                    <tr>
+                        <th>地址id</th>
+                        <th>地址名称</th>
+                        <th>地址邮编</th>
+                        <th>所属用户</th>
+                        <th class="text-center">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <% for( let i   in  address){ %>
+                        <tr>
+                            <td><%= address[i].adid %></td>
+                            <td><%= address[i].addr %></td>
+                            <td><%= address[i].pcode %></td>
+                            <td><%= address[i].usn %></td>
+                            <td class="text-center">
+                                <a href="/address/edit?&id=<%= address[i].adid %>">修改</a>|
+                                <a href="/address/delete?&id=<%= address[i].adid %>">删除</a>
+                            </td>
+                        </tr>
+                    <%}%>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+</script>
+</body>
+</html>
